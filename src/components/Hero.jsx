@@ -1,16 +1,76 @@
-const Hero = ({ setCurrentPage }) => (
-  <section className="hero" id="home">
-    <div className="container hero-content">
-      <img src="/images/Vertical-white.png" alt="الابتكار الذكي — The Smart Innovation" className="hero-logo" />
-      <p className="hero-tag">Technology solutions for critical operations</p>
-      <h1>Integrated technology for the modern enterprise</h1>
-      <p className="hero-desc">The Smart Innovation provides IT infrastructure, data centers, electronic gates, surveillance systems, cybersecurity, artificial intelligence, and custom software solutions for organizations and oil field operations.</p>
-      <div className="hero-actions">
-        <a href="#services" className="btn btn-primary" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Explore Our Services</a>
-        <a href="#contact" className="btn btn-outline" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Contact Us</a>
-      </div>
-    </div>
-  </section>
-);
+import { Shield, ArrowRight, Layers, MessageSquare } from 'lucide-react';
+import NocTopologyPreview from './NocTopologyPreview';
 
-export default Hero;
+export default function Hero({ lang = 'en', t, onNavigateRfp, onNavigateServices }) {
+  return (
+    <section className="hero" id="home">
+      <div className="container hero-container">
+        <div className="hero-grid">
+          {/* Left Column: Enterprise Value Proposition & High-Trust Metrics */}
+          <div className="hero-content-col">
+            <div className="hero-badge">
+              <Shield size={14} className="text-cyan" />
+              <span>{t.hero.badge}</span>
+            </div>
+
+            <h1 className="hero-headline">
+              {t.hero.headline}
+            </h1>
+
+            <p className="hero-subhead">
+              {t.hero.subhead}
+            </p>
+
+            {/* Primary Action Buttons */}
+            <div className="hero-actions-row">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => onNavigateRfp()}
+              >
+                <span>{t.hero.ctaRfp}</span>
+                <ArrowRight size={16} />
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => onNavigateServices()}
+              >
+                <Layers size={16} />
+                <span>{t.hero.ctaServices}</span>
+              </button>
+
+              <a
+                href="https://wa.me/9647860808090"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-whatsapp"
+                aria-label="Direct WhatsApp Engineering Desk"
+              >
+                <MessageSquare size={16} />
+                <span>{t.hero.ctaWhatsapp}</span>
+              </a>
+            </div>
+
+            {/* Quantified Past Performance Metrics */}
+            <div className="hero-metrics-grid">
+              {t.hero.metrics.map((metric, i) => (
+                <div className="metric-box" key={i}>
+                  <div className="metric-value">{metric.value}</div>
+                  <div className="metric-label">{metric.label}</div>
+                  <div className="metric-sub text-muted">{metric.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Interactive NOC & Network Topology Visualizer */}
+          <div className="hero-visual-col">
+            <NocTopologyPreview lang={lang} t={t} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

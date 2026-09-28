@@ -1,37 +1,104 @@
-import { ArrowRight, BrainCircuit, Camera, Cable, Code2, Database, DoorOpen, ShieldCheck, Wifi } from 'lucide-react';
+import { useState } from 'react';
+import { Server, ShieldAlert, Cpu, Check, ArrowRight, Layers } from 'lucide-react';
 
-const services = [
-  { icon: <DoorOpen size={32} />, title: 'Electronic Gates & Access Control', desc: 'Electronic gate systems and access control solutions for facilities, offices, and operational sites.', features: ['Entry and exit systems', 'Access control integration', 'Site security planning'] },
-  { icon: <Database size={32} />, title: 'Data Centers & Server Infrastructure', desc: 'Design and implementation of data center and server environments to support business applications and critical operations.', features: ['Server and storage infrastructure', 'Virtualization and backup', 'Systems integration'] },
-  { icon: <Camera size={32} />, title: 'CCTV & Surveillance', desc: 'Video surveillance and monitoring systems designed around the needs of commercial and industrial sites.', features: ['Camera system design', 'Recording and monitoring', 'Integration with access control'] },
-  { icon: <Cable size={32} />, title: 'IT Infrastructure & Fiber Optics', desc: 'Structured cabling, fiber optic connectivity, and the network infrastructure that connects people, systems, and sites.', features: ['Fiber optic networks', 'Structured cabling', 'LAN and WAN design'] },
-  { icon: <Wifi size={32} />, title: 'Wireless Connectivity', desc: 'Wireless networks and site connectivity for offices, facilities, and remote operational locations.', features: ['Wireless network design', 'Site-to-site connectivity', 'Network deployment'] },
-  { icon: <ShieldCheck size={32} />, title: 'Cybersecurity', desc: 'Security solutions to help organizations protect their networks, systems, data, and users.', features: ['Security assessment', 'Network and endpoint protection', 'Monitoring and response'] },
-  { icon: <BrainCircuit size={32} />, title: 'AI Solutions', desc: 'Practical artificial intelligence solutions for process automation, data analysis, and decision support.', features: ['Workflow automation', 'Data analytics', 'AI integration'] },
-  { icon: <Code2 size={32} />, title: 'Software & Oil Field Systems', desc: 'Custom software development and systems integration for enterprise processes and oil field operations.', features: ['Custom applications', 'Operational dashboards', 'Oil field system integration'] }
-];
+export default function Services({ lang = 'en', t, onConfigurePillarRfp }) {
+  const [activeFilter, setActiveFilter] = useState('all');
 
-const Services = ({ navigateToContact }) => (
-  <section className="section section-alt" id="services">
-    <div className="container">
-      <div className="section-header">
-        <span className="section-label">Our Services</span>
-        <h2>Solutions for infrastructure, security, and operations</h2>
-        <p>From physical infrastructure to software and AI, we help organizations plan and implement technology suited to their requirements.</p>
+  const pillarIcons = {
+    infrastructure: <Server size={32} className="text-cyan" />,
+    security: <ShieldAlert size={32} className="text-cyan" />,
+    cyber_ai: <Cpu size={32} className="text-cyan" />,
+  };
+
+  const filteredPillars = activeFilter === 'all'
+    ? t.suites.pillars
+    : t.suites.pillars.filter((p) => p.id === activeFilter);
+
+  return (
+    <section className="section section-alt" id="services">
+      <div className="container">
+        <div className="section-header text-center">
+          <span className="section-label">
+            <Layers size={16} />
+            {t.suites.title}
+          </span>
+          <h2>{lang === 'ar' ? 'الأجنحة التشغيلية الثلاثة للمؤسسات والمنشآت الكبرى' : 'Three Enterprise Operational Suites'}</h2>
+          <p className="section-lead">{t.suites.subtitle}</p>
+        </div>
+
+        {/* Filter Segmented Control */}
+        <div className="suites-filter-bar">
+          <button
+            type="button"
+            className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('all')}
+          >
+            {t.suites.filterAll}
+          </button>
+          {t.suites.pillars.map((pillar) => (
+            <button
+              type="button"
+              key={pillar.id}
+              className={`filter-btn ${activeFilter === pillar.id ? 'active' : ''}`}
+              onClick={() => setActiveFilter(pillar.id)}
+            >
+              {pillar.title}
+            </button>
+          ))}
+        </div>
+
+        {/* 3 Pillars Grid */}
+        <div className="pillars-grid">
+          {filteredPillars.map((pillar) => (
+            <article className="pillar-card" key={pillar.id}>
+              <div className="pillar-header">
+                <div className="pillar-icon-box">
+                  {pillarIcons[pillar.id]}
+                </div>
+                <div>
+                  <span className="pillar-category">{pillar.category}</span>
+                  <h3 className="pillar-title">{pillar.title}</h3>
+                </div>
+              </div>
+
+              <p className="pillar-tagline">{pillar.tagline}</p>
+              <p className="pillar-desc">{pillar.description}</p>
+
+              <div className="pillar-specs-block">
+                <h4 className="specs-title">
+                  {lang === 'ar' ? 'المواصفات والأنظمة الهندسية المشمولة:' : 'Core Engineering Deliverables:'}
+                </h4>
+                <ul className="pillar-specs-list">
+                  {pillar.specs.map((spec, i) => (
+                    <li key={i}>
+                      <Check size={16} className="text-cyan flex-shrink-0" />
+                      <span>{spec}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Technologies / Standards tags */}
+              <div className="pillar-tech-chips">
+                {pillar.technologies.map((tech, i) => (
+                  <span className="tech-chip" key={i}>{tech}</span>
+                ))}
+              </div>
+
+              <div className="pillar-footer">
+                <button
+                  type="button"
+                  className="btn btn-outline btn-full"
+                  onClick={() => onConfigurePillarRfp(pillar.id)}
+                >
+                  <span>{t.suites.requestPillarRfp}</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
-      <div className="services-grid">
-        {services.map((service) => (
-          <article className="service-card" key={service.title}>
-            <div className="service-icon" aria-hidden="true">{service.icon}</div>
-            <h3>{service.title}</h3>
-            <p>{service.desc}</p>
-            <ul>{service.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-            <a className="service-link" href="#contact" onClick={(e) => { e.preventDefault(); navigateToContact(`I would like to learn more about ${service.title}.`); }}>Request details <ArrowRight size={16} /></a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-export default Services;
+    </section>
+  );
+}

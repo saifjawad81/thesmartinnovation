@@ -1,22 +1,87 @@
-import { Target, Eye, Activity } from 'lucide-react';
+import { Target, Eye, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
-const WhoWeAre = () => (
-  <section className="section" id="who-we-are">
-    <div className="container">
-      <div className="section-header"><span className="section-label">About Us</span><h2>Technology aligned with your operations</h2></div>
-      <div className="about-grid">
-        <div className="about-text">
-          <p><strong>The Smart Innovation</strong> delivers technology solutions for commercial and industrial organizations. Our scope spans IT infrastructure, fiber optic and wireless networks, data centers, electronic gates, CCTV, cybersecurity, AI, and software development.</p>
-          <p>We work with clients to understand operational requirements, plan suitable systems, and bring together the technologies needed across facilities and oil field environments.</p>
+export default function WhoWeAre({ lang = 'en' }) {
+  const content = {
+    en: {
+      badge: 'ENTERPRISE DELIVERY TRACK RECORD',
+      title: 'Technology Aligned With Mission-Critical Operations',
+      p1: 'The Smart Innovation is a specialized engineering integrator delivering resilient digital infrastructure, automated facility defense, and operational intelligence across Iraq.',
+      p2: 'From high-density financial data centers in Baghdad to ATEX-certified telemetry and perimeter surveillance in the harsh oil basins of Basra and Missan, we bridge physical security, critical power, and enterprise networking into a singular, accountable operational fabric.',
+      cards: [
+        {
+          icon: <Target size={24} className="text-cyan" />,
+          title: 'Turnkey Architectural Scope',
+          desc: 'End-to-end design, civil-structural integration, Tier-certified cabling, and multi-year maintenance SLAs.'
+        },
+        {
+          icon: <Eye size={24} className="text-cyan" />,
+          title: 'Standards-Grounded Engineering',
+          desc: 'Adherence to TIA-942, ISO 27001, and IEC 62443 guarantees zero-compromise audit readiness for enterprise and public tenders.'
+        },
+        {
+          icon: <ShieldCheck size={24} className="text-cyan" />,
+          title: 'Field-Proven In Extreme Climates',
+          desc: 'Deployment resilience against 55°C desert ambient heat, electrical harmonics, and hazardous gas classifications.'
+        }
+      ]
+    },
+    ar: {
+      badge: 'سجل حافل في تنفيذ المشاريع الحيوية',
+      title: 'حلول تكنولوجية تلبي متطلبات العمليات الحرجة',
+      p1: 'شركة الابتكار الذكي هي جهة هندسية متخصصة في تصميم وبناء البنية التحتية الرقمية، أنظمة الأمن الصناعي وأتمتة المنشآت والذكاء الاصطناعي في العراق.',
+      p2: 'من قاعات الخوادم ومراكز البيانات الحساسة في بغداد إلى شبكات الاتصال الميدانية وكاميرات المراقبة المقاومة للانفجار في حقول البصرة وميسان، نوفر منظومة تقنية متكاملة تربط البنية التحتية، استقرار الطاقة والأمن السيبراني تحت سقف هندسي موحد.',
+      cards: [
+        {
+          icon: <Target size={24} className="text-cyan" />,
+          title: 'تنفيذ متكامل تسليم مفتاح (Turnkey)',
+          desc: 'دراسات هندسية معمارية، مد الكابلات المعتمدة، الربط الشبكي، وتوفير عقود صيانة ودعم فني طويلة الأمد.'
+        },
+        {
+          icon: <Eye size={24} className="text-cyan" />,
+          title: 'هندسة قائمة على المعايير الدولية',
+          desc: 'الالتزام الصارم بمعايير TIA-942 و ISO 27001 و IEC 62443 لضمان الجاهزية للتدقيق والمناقصات الرسمية.'
+        },
+        {
+          icon: <ShieldCheck size={24} className="text-cyan" />,
+          title: 'موثوقية مجربة في أقسى الظروف',
+          desc: 'تحمل درجات حرارة صحراوية تصل إلى 55 مئوية، تقلبات الطاقة الكهربائية، ومطابقة البيئات النفطية الخطرة.'
+        }
+      ]
+    }
+  };
+
+  const c = content[lang] || content.en;
+
+  return (
+    <section className="section" id="who-we-are">
+      <div className="container">
+        <div className="section-header">
+          <span className="section-label">
+            <CheckCircle2 size={16} />
+            {c.badge}
+          </span>
+          <h2>{c.title}</h2>
         </div>
-        <div className="about-cards">
-          <article className="value-card"><span className="value-icon"><Target size={28} /></span><div><h3>Our Focus</h3><p>Technology that addresses practical operational needs.</p></div></article>
-          <article className="value-card"><span className="value-icon"><Eye size={28} /></span><div><h3>Our Approach</h3><p>Clear requirements, considered design, and coordinated implementation.</p></div></article>
-          <article className="value-card"><span className="value-icon"><Activity size={28} /></span><div><h3>Our Commitment</h3><p>Reliable communication and solutions tailored to each project.</p></div></article>
+
+        <div className="about-grid">
+          <div className="about-text">
+            <p className="lead-paragraph">{c.p1}</p>
+            <p>{c.p2}</p>
+          </div>
+
+          <div className="about-cards">
+            {c.cards.map((card, idx) => (
+              <article className="value-card" key={idx}>
+                <span className="value-icon">{card.icon}</span>
+                <div>
+                  <h3>{card.title}</h3>
+                  <p>{card.desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
-
-export default WhoWeAre;
+    </section>
+  );
+}
