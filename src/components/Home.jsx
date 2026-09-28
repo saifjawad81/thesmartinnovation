@@ -20,6 +20,7 @@ export default function Home({
         t={t} 
         onNavigateRfp={onNavigateRfp} 
         onNavigateServices={onNavigateServices} 
+        onSelectPillar={onConfigurePillarRfp}
       />
 
       <TrustBar 

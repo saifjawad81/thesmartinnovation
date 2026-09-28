@@ -21,28 +21,7 @@ export const translations = {
         { value: '180+ km', label: 'Fiber & Wireless Backbone', sub: 'Deployed across urban & field zones' },
         { value: '4,800+', label: 'Secured Perimeter Nodes', sub: 'CCTV, radar & biometric access' },
         { value: '< 24h', label: 'Consultation Response', sub: 'Senior systems engineer review' },
-      ],
-      interactiveConsole: {
-        title: 'Operational Infrastructure Console',
-        status: 'SYSTEM TELEMETRY LIVE',
-        tabs: {
-          topology: 'Network Topology',
-          noc: 'NOC Telemetry',
-          perimeter: 'Perimeter & Access',
-        },
-        nodes: {
-          baghdad: 'Baghdad Central NOC',
-          rumaila: 'North Rumaila Oilfield Hub',
-          zubair: 'Zubair Processing Facility',
-          basra: 'Basra Marine Gateway',
-        },
-        latency: 'Latency',
-        throughput: 'Throughput',
-        temp: 'Field Ambient',
-        power: 'Dual Power UPS',
-        healthy: 'OPERATIONAL',
-        failover: 'Microwave + Sat Active',
-      }
+      ]
     },
     trust: {
       title: 'Standards, Compliance & Tier-1 Ecosystem',
@@ -247,28 +226,7 @@ export const translations = {
         { value: '+180 كم', label: 'مسارات كابلات الألياف واللاسلكي', sub: 'منفذة في المدن والحقول النفطية' },
         { value: '+4,800', label: 'نقطة حماية وتحكم طرفية', sub: 'كاميرات حرارية، رادارات وبوابات' },
         { value: 'أقل من 24 س', label: 'زمن الاستجابة للاستشارة', sub: 'مراجعة من مهندس نظم أول' },
-      ],
-      interactiveConsole: {
-        title: 'لوحة التحكم والقياس الميداني (NOC)',
-        status: 'بيانات المراقبة الحية نشطة',
-        tabs: {
-          topology: 'المخطط الشبكي (Topology)',
-          noc: 'مؤشرات مركز العمليات (NOC)',
-          perimeter: 'الأمن والمنافذ الميدانية',
-        },
-        nodes: {
-          baghdad: 'مركز التحكم المركزي — بغداد',
-          rumaila: 'عقدة حقل شمال الرميلة — البصرة',
-          zubair: 'منشأة معالجة الزبير — البصرة',
-          basra: 'بوابة ميناء البصرة اللوجستية',
-        },
-        latency: 'زمن الاستجابة',
-        throughput: 'سعة نقل البيانات',
-        temp: 'حرارة الحقل المحيطة',
-        power: 'أنظمة الطاقة غير المنقطعة',
-        healthy: 'حالة مستقرة وطبيعية',
-        failover: 'المايكرويف والستالايت نشط',
-      }
+      ]
     },
     trust: {
       title: 'المعايير الدولية، التوافق ومنظومة الشركاء',
